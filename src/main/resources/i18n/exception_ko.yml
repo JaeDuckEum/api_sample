@@ -10,3 +10,5 @@
 "com.mobigen.framework.security.SessionManager.changeLocale": "Change Session Locale Error"
 "com.mobigen.framework.utility.restful.RestAPI": "RestAPI Error"
 "com.mobigen.sample.SampleController.authenticate": "인증을 실패하였습니다."
+"com.mobigen.sample.SampleController.getException": "Exception 입니다."
+"com.mobigen.sample.SampleController.getAccessDeniedException": "AccessDeniedException 입니다."

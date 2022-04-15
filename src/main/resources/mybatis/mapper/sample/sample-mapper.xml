@@ -25,4 +25,15 @@
         	</if>
         </where>
     </select>
+    
+    <select id="getBoardListException" resultMap="boardListMap">
+        SELECT 
+        	a.xy
+        FROM board
+        <where>
+        	<if test='searchDeleteYn != null'>
+        		AND delete_yn = #{searchDeleteYn }
+        	</if>
+        </where>
+    </select>
 </mapper>

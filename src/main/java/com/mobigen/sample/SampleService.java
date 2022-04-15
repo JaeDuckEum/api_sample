@@ -3,9 +3,12 @@ package com.mobigen.sample;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.mobigen.framework.component.Messages;
+import com.mobigen.framework.exception.JsonResultException;
 import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.security.SessionManager;
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +63,31 @@ public class SampleService {
     
     public List<?> getBoardList(Map<String, Object> param) throws Exception {
         return sampleMapper.getBoardList(param);
+    }
+    
+    public List<?> getException(Map<String, Object> param) throws Exception {
+    	if ( 1 == 1 ) {
+    		throw new Exception();
+    	}
+    	return sampleMapper.getBoardListException(param);
+    }
+    
+    public List<?> getAccessDeniedException(Map<String, Object> param) throws Exception {
+    	if ( 1 == 1 ) {
+    		throw new Exception();
+    	}
+    	return sampleMapper.getBoardListException(param);
+    }
+    
+    public List<?> getBoardListException(Map<String, Object> param) throws Exception {
+    	String exceptionType = StringUtils.defaultString((String)param.get("exceptionType"), "");
+    	
+    	if ( ExceptionType.EXCEPTION.getCode().equals(exceptionType) ) {
+    		throw new Exception("com.mobigen.sample.SampleController.getBoardListException.exception", null);
+    	} else if ( ExceptionType.AccessDeniedException.getCode().equals(exceptionType) ) {
+    		throw new JsonResultException("com.mobigen.sample.SampleController.getBoardListException.accessDeniedException", null);
+    	}
+    	
+        return sampleMapper.getBoardListException(param);
     }
 }

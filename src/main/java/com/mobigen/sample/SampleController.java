@@ -6,6 +6,8 @@ import com.mobigen.framework.result.annotation.ResponseJsonResult;
 import com.mobigen.framework.utility.RSA;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -80,9 +82,31 @@ public class SampleController {
     @ResponseJsonResult
     @PostMapping("/board/list")
     public Object getBoardList(@RequestBody Map<String, Object> param) throws Exception {
-    //@GetMapping("/board/list")
-    //public Object getBoardList(Map<String, Object> param) throws Exception {
     	List list = sampleService.getBoardList(param);
+    	return list;
+    }
+    
+    @ResponseJsonResult
+    @PostMapping("/board/list/exception")
+    public Object getException(@RequestBody Map<String, Object> param) throws Exception {
+    	
+    	List list = sampleService.getException(param);
+    	
+    	return list;
+    }
+    
+    @ResponseJsonResult
+    @PostMapping("/board/list/accessDeniedException")
+    public Object getAccessDeniedException(@RequestBody Map<String, Object> param) throws Exception {
+    	
+    	String exceptionType = StringUtils.defaultString((String)param.get("exceptionType"), "");
+    	
+    	List list = null;
+    	if ( ExceptionType.EXCEPTION.getCode().equals(exceptionType) ) {
+    		list = sampleService.getException(param);
+    	} else if ( ExceptionType.AccessDeniedException.getCode().equals(exceptionType) ) {
+    		list = sampleService.getAccessDeniedException(param);
+    	}
     	return list;
     }
 }

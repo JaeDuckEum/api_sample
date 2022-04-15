@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface SampleMapper {
     Object getUser(String username) throws Exception;
     List<?> getBoardList(Map<String, Object> param) throws Exception;
+    List<?> getBoardListException(Map<String, Object> param) throws Exception;
 }
