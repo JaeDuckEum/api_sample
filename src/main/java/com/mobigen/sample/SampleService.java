@@ -79,13 +79,13 @@ public class SampleService {
     	return sampleMapper.getBoardListException(param);
     }
     
-    public List<?> getBoardListException(Map<String, Object> param) throws Exception {
+    public List<?> getBoardServiceException(Map<String, Object> param) throws Exception {
     	String exceptionType = StringUtils.defaultString((String)param.get("exceptionType"), "");
     	
-    	if ( ExceptionType.EXCEPTION.getCode().equals(exceptionType) ) {
-    		throw new Exception("com.mobigen.sample.SampleController.getBoardListException.exception", null);
-    	} else if ( ExceptionType.AccessDeniedException.getCode().equals(exceptionType) ) {
-    		throw new JsonResultException("com.mobigen.sample.SampleController.getBoardListException.accessDeniedException", null);
+    	if ( ExceptionType.BoardViewException.getCode().equals(exceptionType) ) {
+    		throw new JsonResultException("com.mobigen.sample.SampleController.getBoardExcepton", new String[]{"BoardViewException 입니다."});
+    	} else if ( ExceptionType.BoardListException.getCode().equals(exceptionType) ) {
+    		throw new JsonResultException("com.mobigen.sample.SampleController.getBoardExcepton", new String[]{"BoardListException 입니다."});
     	}
     	
         return sampleMapper.getBoardListException(param);

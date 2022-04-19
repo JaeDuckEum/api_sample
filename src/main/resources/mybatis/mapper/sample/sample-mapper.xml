@@ -20,7 +20,7 @@
         SELECT *
         FROM board
         <where>
-        	<if test='searchDeleteYn != null'>
+        	<if test='searchDeleteYn != null and searchDeleteYn != ""'>
         		AND delete_yn = #{searchDeleteYn }
         	</if>
         </where>
@@ -31,7 +31,7 @@
         	a.xy
         FROM board
         <where>
-        	<if test='searchDeleteYn != null'>
+        	<if test='searchDeleteYn != null and searchDeleteYn != ""'>
         		AND delete_yn = #{searchDeleteYn }
         	</if>
         </where>

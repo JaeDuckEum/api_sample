@@ -8,6 +8,8 @@ import lombok.Getter;
 public enum ExceptionType {
 	EXCEPTION("EX", "Exception"),
 	AccessDeniedException("ADEX", "AccessDeniedException"),
+	BoardViewException("BVEX", "BoardViewException"),
+	BoardListException("BLEX", "BoardListException"),
 	;
 	
     @Getter

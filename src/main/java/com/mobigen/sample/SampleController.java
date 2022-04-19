@@ -2,6 +2,7 @@ package com.mobigen.sample;
 
 import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.User;
+import com.mobigen.framework.result.JsonResult;
 import com.mobigen.framework.result.annotation.ResponseJsonResult;
 import com.mobigen.framework.utility.RSA;
 import lombok.AllArgsConstructor;
@@ -108,5 +109,22 @@ public class SampleController {
     		list = sampleService.getAccessDeniedException(param);
     	}
     	return list;
+    }
+    
+    /*@ResponseJsonResult
+    @PostMapping("/board/exception")
+    public Object getBoardException(@RequestBody Map<String, Object> param) throws Exception {
+    	List list = sampleService.getBoardServiceException(param);
+    	return list;
+    }*/
+    
+    @PostMapping("/board/exception")
+    @ResponseBody
+    public Object getBoardException(@RequestBody Map<String, Object> param) throws Exception {
+    	
+    	JsonResult js = new JsonResult();
+    	List list = sampleService.getBoardServiceException(param);
+    	js.setData(list);
+    	return js;
     }
 }
