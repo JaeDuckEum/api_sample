@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mobigen.tree.service.TreeMapper">
+    <insert id="insertCategory" parameterType="com.mobigen.tree.model.CategoryDto">
+    /* insertCategory */
+    INSERT INTO tb_category (
+    	prpty_id,
+    	parent_id,
+    	depth,
+    	sort_order,
+    	value,
+    	ctgry_ver,
+    	reg_user,
+    	reg_date,
+    	updt_user,
+    	updt_date
+    ) VALUES (
+    	#{prptyId},
+    	#{parentId},
+    	#{depth},
+    	#{sortOrder},
+    	#{value},
+    	date_format(now(), '%Y%m%d%H%i%s'),
+    	'TESTER',
+    	NOW(),
+    	'TESTER',
+    	NOW()
+    )
+    </insert>
+    
+    <select id="selectCurrentCategoryVersion" resultType="String">
+    /* selectCurrentCategoryVersion */
+    	SELECT MAX(CAST(ctgry_ver as signed)) FROM TB_CATEGORY
+    </select>
+    
+    <select id="selectCategoryList" parameterType="hashMap" resultType="com.mobigen.tree.model.CategoryDto">
+    /* selectCategoryList */
+    	<!-- SELECT 
+			tc.PRPTY_ID AS prptyId 
+			, tc.PARENT_ID AS parentId 
+			, tc.DEPTH 
+			, tc.SORT_ORDER AS sortOrder 
+			, tc.VALUE 
+			, tc.CTGRY_VER AS ctgryVer 
+			, tc.REG_USER AS regUser 
+			, tc.REG_DATE AS regDate 
+			, tc.UPDT_USER AS updtUser 
+			, tc.UPDT_DATE AS updtDate 
+		FROM TB_CATEGORY tc
+		WHERE tc.ctgry_ver = #{ctgryVer}
+    	ORDER BY tc.DEPTH, tc.SORT_ORDER -->
+    </select>
+</mapper>
