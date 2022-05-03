@@ -23,11 +23,11 @@ public class JwtManager {
     @param userIdx
     @return String
      */
-    public static String createJwt(int userIdx) {
+    public static String createJwt(String id) {
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")
-                .claim("userIdx", userIdx)
+                .claim("id", id)
                 .setIssuedAt(now)
                 .setExpiration(new Date(System.currentTimeMillis() + 1 * (1000 * 60 * 60 * 24 * 365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
@@ -36,10 +36,10 @@ public class JwtManager {
 
     /*
     JWT에서 userIdx 추출
-    @return int
+    @return string
     @throws BaseException
      */
-    public static int getUserIdx() {
+    public static String getUserId() {
         try {
             //1. JWT 추출
             String accessToken = getJwt();
@@ -54,7 +54,7 @@ public class JwtManager {
 
             // 3. userIdx 추출
             return claims.getBody()
-                    .get("userIdx", Integer.class);
+                    .get("id", String.class);
         } catch (JwtException e) {
             throw new BaseException(INVALID_JWT);
         }

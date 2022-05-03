@@ -73,7 +73,7 @@ public enum BaseResponseStatus {
     DUPLICATED_USER(false, 3013, "이미 존재하는 회원입니다."),
 
     // [POST] /users/login
-    FAILED_TO_LOGIN(false, 3015, "로그인에 실패하였습니다."),
+    FAILED_TO_LOGIN(false, 3015, "이메일이나 패스워드가 일치하지 않습니다."),
 
     // [Common] boards
     NOT_FOUND_BOARD(false, 3040, "존재하지 않는 게시판입니다."),

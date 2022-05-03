@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserDTO {
 
+    /**
+     * 회원가입 request
+     * */
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
@@ -24,10 +27,45 @@ public class UserDTO {
         }
     }
 
+    /**
+     * 회원가입 response
+     * */
     @AllArgsConstructor
     @Getter
     public static class createRes {
         private Long userId;
         private String email;
+    }
+
+    /**
+     * 로그인 request
+     * */
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    public static class loginReq{
+        private String email;
+        private String password;
+    }
+
+    /**
+     * 로그인 response
+     * */
+    @AllArgsConstructor
+    @Getter
+    public static class loginRes {
+        private Long userId;
+        private String nickname;
+        private String token;
+    }
+
+    /**
+     * JWT response
+     * */
+    @AllArgsConstructor
+    @Getter
+    public static class getUserInfoRes {
+        private Long userId;
+        private String nickname;
     }
 }

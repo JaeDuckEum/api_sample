@@ -5,6 +5,7 @@ import com.softsquared.template.config.BaseResponseStatus;
 import com.softsquared.template.config.State;
 import com.softsquared.template.src.app.domain.user.User;
 import com.softsquared.template.src.app.domain.user.UserRepository;
+import com.softsquared.template.utils.JwtManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class ContentService {
 
 
     public ContentDTO.createRes createContent(ContentDTO.createReq req){
-        User user = userRepository.findById(req.getUserId())
+        User user = userRepository.findById(Long.valueOf(JwtManager.getUserId()))
                 .orElseThrow(()-> new BaseException(BaseResponseStatus.REQUEST_ERROR));
         Content content = contentRepository.save(req.contentBuild(user));
         return new ContentDTO.createRes(content.getId(), content.getTitle());
